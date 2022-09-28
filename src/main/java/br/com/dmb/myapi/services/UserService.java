@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.dmb.myapi.domain.User;
 import br.com.dmb.myapi.repositories.UserRepository;
+import br.com.dmb.myapi.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UserService {
 	@Autowired
 	private UserRepository repository;
+
 	public User findById(Integer id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado. Id: " + id + ", Tipo: " + User.class.getName()));
 	}
 }
