@@ -31,4 +31,9 @@ public class UserService {
 		newObj.setPassword(obj.getPassword());
 		return repository.save(newObj);
 	}
+
+	public void delete(Integer id) {
+		findById(id);
+		repository.deleteById(id);
+	}
 }
