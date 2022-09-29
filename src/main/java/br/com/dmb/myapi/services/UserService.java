@@ -1,5 +1,6 @@
 package br.com.dmb.myapi.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,9 @@ public class UserService {
 		Optional<User> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado. Id: " + id + ", Tipo: " + User.class.getName()));
+	}
+
+	public List<User> findAll() {
+		return repository.findAll();
 	}
 }
